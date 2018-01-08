@@ -82,7 +82,7 @@ export class NegociacaoController {
              * um recurso novo e dependendo a versão do babel que é utilizada pode ser que não funciona (necessário instalar o 
              * plugin babel-plugin-syntax-dynamic-import)
              */
-            const { NegociacaoService } = await import('../domain/negociacao/NegociacaoService.js');
+            const { NegociacaoService } = await System.import('../domain/negociacao/NegociacaoService.js');
             const service = new NegociacaoService();
 
             const negociacoes = await service.obtemNegociacoesDoPeriodo();
