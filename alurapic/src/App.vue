@@ -66,6 +66,8 @@ export default {
 
   .filtro {
     display: block;
-    width: 100%
+    width: 75vw;
+    padding: 10px;
+    margin-left: 44px;
   }
 </style>
