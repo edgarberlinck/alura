@@ -1,7 +1,7 @@
 <template>
   <div class="corpo">
-    <meu-menu :routes="piroca" />
-    <transition name="routes">
+    <meu-menu :routes="routes" />
+    <transition name="pagina">
       <router-view></router-view>
     </transition>
   </div>
