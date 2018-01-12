@@ -10,14 +10,14 @@
 </template>
 
 <script>
-export default {
-  props: ['titulo'],
-  data () {
-    return {
-      visivel: true
+  export default {
+    props: ['titulo'],
+    data () {
+      return {
+        visivel: true
+      }
     }
   }
-}
 </script>
 
 <style scoped>
@@ -27,7 +27,7 @@ export default {
       display: inline-block;
       margin: 5px;
       max-width: 200px;
-      min-height: 250px;
+      min-height: 320px;
       height: 100%;
       vertical-align: top;
       text-align: center;
