@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1 v-text="titulo" class="centralizado"></h1>
+    <p v-if="mensagem" class="centralizado">{{ mensagem }}</p>
     <input type="serach" class="filtro" placeholder="Filtre pelo titulo" v-on:input="filtro = $event.target.value" >
 
     <ul class="lista-fotos">
@@ -41,12 +42,13 @@ export default {
     return {
       titulo: 'Alurapic',
       fotos: [],
-      filtro: ''
+      filtro: '',
+      mensagem: ''
     }
   },
 
   created () {
-    this.$http.get('http://localhost:3000/v1/fotos')
+    this.$http.get('fotos')
       .then(res => res.json())
       .then(fotos => this.fotos = fotos, err => console.log);
   },
@@ -61,7 +63,17 @@ export default {
   },
   methods: {
     remove(foto) {
-        alert('Remover ' + foto.titulo);
+        this.$http
+          .delete(`fotos/${foto._id}`)
+          .then(() => {
+                this.mensagem = `${foto.titulo} removida com sucesso`;
+                let index = this.fotos.indexOf(foto);
+                this.fotos.splice(index, 1);
+              },
+               err => {
+                 console.log(err); this.mensagem = `Não foi possível remover ${foto.titulo}`
+                 }
+          );
     }
   }
 }
