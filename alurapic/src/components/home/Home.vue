@@ -8,6 +8,9 @@
       <li class="lista-fotos-item" v-for="foto of fotosComFiltro" :key="foto.alt">
         <meu-painel :titulo="foto.titulo">
           <imagem-responsiva v-meu-transform:scale.animate="1.2" :src='foto.url'></imagem-responsiva>
+          <router-link :to="{name: 'alterar', params: { id: foto._id }  }">
+            <meu-botao tipo= "button" rotulo= "ALTERAR" confirmar=false />
+          </router-link>
           <meu-botao
             tipo="button"
             rotulo="REMOVER"
@@ -26,6 +29,7 @@ import ImagemResponsiva from '../shared/imagemResponsiva/ImagemResponsiva.vue';
 import Botao from '../shared/botao/Botao.vue';
 
 import transform from '../../directives/Transform';
+import FotoService from '../../domain/foto/FotoService';
 
 export default {
   components: {
@@ -48,9 +52,9 @@ export default {
   },
 
   created () {
-    this.$http.get('fotos')
-      .then(res => res.json())
-      .then(fotos => this.fotos = fotos, err => console.log);
+    this.service = new FotoService(this.$resource);
+
+    this.service.lista().then(fotos => this.fotos = fotos, err => console.log);
   },
 
   computed: {
@@ -63,8 +67,7 @@ export default {
   },
   methods: {
     remove(foto) {
-        this.$http
-          .delete(`fotos/${foto._id}`)
+        this.service.apaga(foto._id)
           .then(() => {
                 this.mensagem = `${foto.titulo} removida com sucesso`;
                 let index = this.fotos.indexOf(foto);
@@ -72,7 +75,7 @@ export default {
               },
                err => {
                  console.log(err); this.mensagem = `Não foi possível remover ${foto.titulo}`
-                 }
+              }
           );
     }
   }
