@@ -1,0 +1,21 @@
+$cor-perigo: firebrick;
+$cor-padrao: darkcyan;
+$text-color: white;
+
+.botao {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 3px;
+  margin: 10px;
+  font-size: 1.2em;
+}
+
+.botao-perigo {
+  background: $cor-perigo;
+  color: $text-color;
+}
+
+.botao-padrao {
+  background: $cor-padrao;
+  color: $text-color;
+}
