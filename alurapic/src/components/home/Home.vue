@@ -54,7 +54,7 @@ export default {
   created () {
     this.service = new FotoService(this.$resource);
 
-    this.service.lista().then(fotos => this.fotos = fotos, err => console.log);
+    this.service.lista().then(fotos => this.fotos = fotos, err => this.mensagem = err.message);
   },
 
   computed: {
@@ -74,7 +74,7 @@ export default {
                 this.fotos.splice(index, 1);
               },
                err => {
-                 console.log(err); this.mensagem = `Não foi possível remover ${foto.titulo}`
+                 console.log(err); this.mensagem = err.message
               }
           );
     }
